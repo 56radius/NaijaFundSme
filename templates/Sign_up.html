@@ -1,0 +1,70 @@
+<!-- Coded By Code-In-->
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NaijaFundSme | Sign Up </title>
+
+    <!-- styling -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Sign_up.css')}}">
+
+    <!-- scripting -->
+  <script type="text/javascript" src="js/jquery-1.11.3-jquery.min.js"></script>
+  <script type="text/javascript" src="js/validation.min.js"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+  <script type="text/javascript">
+    function valid()
+    {
+      if(document.registration.password.value!= document.registration.cpassword.value)
+      {
+        alert("Password and Re-Type Password Field do not match  !!");
+        document.registration.cpassword.focus();
+        return false;
+      }
+        return true;
+    }
+  </script>
+   </head>
+<body>
+  <div class="wrapper">
+    <h2>Sign Up SME'S</h2>
+      <form method="POST" action="#" class="form-horizontal" onSubmit="valid();"> 
+        <div class="input-box">
+          <input type="text" name='full_name' placeholder="Enter your full name" required>
+        </div>
+        
+        <div class="input-box">
+          <input type="text" name="email"  id="email" placeholder="Enter your email" required>
+        </div>
+        <div class="input-box">
+          <input type="text" name="phoneno" id="phoneno" placeholder="Enter Phone number" required>
+        </div>
+
+         <div class="input-box">
+          <input type="text" name="nin" id="nin" placeholder="National Identification Number" required>
+        </div>
+
+        <div class="input-box">
+          <input type="password" name="password" id="password" placeholder="Create password" required>
+        </div>
+        <div class="input-box">
+          <input type="password" name="c_password" placeholder="Confirm password" required>
+        </div>
+        
+        <div class="policy">
+          <input type="checkbox">
+          </h3>I accept all terms & condition</h3>
+        </div>
+        <div class="input-box button">
+          <input type="submit" name="submit" value="Register Now">
+        </div>
+        <div class="text">
+          <h3>Already have an account? <a href="login.html">Login now</a></h3>
+        </div>
+      </form>
+  </div>
+</body>
+</html>
+<!-- Coded By Code-In -->

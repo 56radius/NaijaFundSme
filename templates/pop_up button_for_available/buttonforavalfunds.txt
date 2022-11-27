@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+
+
+      <div class="center">
+         <input type="checkbox" id="show">
+         <label for="show" class="show-btn">Fund Me</label>
+         <div class="container">
+            <label for="show" class="close-btn fas fa-times" title="close"></label>
+            <div class="text">
+                 Fund Me >> 
+           </div>
+       </div>

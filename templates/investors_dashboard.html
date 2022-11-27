@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+	<!-- Fontawesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css' rel='stylesheet'>
+	<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet'>
+	<script src="https://kit.fontawesome.com/5f0ec56c6d.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet"  href="{{ url_for('static', filename='css/dashboard.css')}}">
+
+	<title>NaijaFundSme |Investor's Dashboard </title>
+</head>
+	<style type="text/css">
+		#sidebar .side-menu.top li a:hover {
+			color: green;
+		}
+
+		#sidebar .brand {
+			font-size: 24px;
+			font-weight: 700;
+			height: 56px;
+			display: flex;
+			align-items: center;
+			color: black;
+			position: sticky;
+			top: 0;
+			left: 0;
+			background: var(--light);
+			z-index: 500;
+			padding-bottom: 20px;
+			box-sizing: content-box;
+		}
+
+		#funding {
+			color: green;
+		}
+
+		#content nav .nav-link:hover {
+			color: green;
+		}
+
+		.active {
+			color: black;
+		}
+
+		#sidebar .side-menu.top li.active a {
+			color: black;
+		}
+
+		#sidebar .side-menu.top li.active a:hover {
+			color: green;
+		}
+
+		#content main .head-title .left .breadcrumb li a.active {
+			color: black;
+			pointer-events: unset;
+		}
+
+		#content main .head-title .left .breadcrumb li a.active:hover {
+			color: green;
+		}
+
+		#content nav form .form-input button {
+			width: 36px;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: green;
+			color: var(--light);
+			font-size: 18px;
+			border: none;
+			outline: none;
+			border-radius: 0 36px 36px 0;
+			cursor: pointer;
+		}
+
+		#content nav .switch-mode::before {
+			content: '';
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			bottom: 2px;
+			width: calc(25px - 4px);
+			background: green;
+			border-radius: 50%;
+			transition: all .3s ease;
+		}
+
+		.wrapper .header{
+			width: 100%;
+			height: 50px;
+			background: #e36686;
+			color: #fff;
+			text-align: center;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 20px;
+			text-transform: uppercase;
+			letter-spacing: 5px;
+			font-weight: 900;
+		}
+
+		.cards_wrap{
+			padding: 20px;
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+		}
+
+		.cards_wrap .card_item{
+			padding: 15px 25px;
+			width: 25%;
+		}
+	
+		.cards_wrap .card_inner{
+			background: #fff;
+			border-radius: 5px;
+			padding: 5px 20px;
+			min-width: 225px;
+			min-height: 315px;
+			max-height: 370px;
+			width: 100%;
+		}
+
+		.cards_wrap .card_item img{
+			width: 100%;
+			height: 80px;
+			margin-bottom: 5px;
+		}
+
+		.cards_wrap .card_item .role_name{
+			color: green;
+			font-weight: 900;
+			letter-spacing: 2px;
+			text-transform: uppercase;
+			font-size: 15px;
+			white-space: nowrap;
+    		overflow: hidden;
+    		text-overflow: ellipsis;
+		}
+
+		.cards_wrap .card_item .real_name{
+			color: #b6c0c2;
+			font-size: 12px;
+			font-weight: 100;
+			margin: 5px 0 10px;
+		}
+
+		.cards_wrap .card_item .film{
+			font-size: 14px;
+			line-height: 24px;
+			color: #7b8ca0;
+		}
+		/*WALLET HOVER*/
+		.dropbtn {
+			background-color: #f9f9f9;
+			color: #828282;
+			padding: 16px;
+			font-size: 16px;
+			border: none;
+		}
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f1f1f1;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			z-index: 1;
+		}
+
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+		.dropdown-content a:hover {background-color: #ddd;}
+
+		.dropdown:hover .dropdown-content {display: block;}
+
+		.dropdown:hover .dropbtn {background-color: #ddd;}
+
+		/*BUTTON FOR FUND WALLET*/
+		.but {
+			background-color: #5cb85c;
+			border: none;
+			color: white;
+			padding: 10px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 2px;
+		}
+
+		/* VIEW SSME BUTTON*/
+		.button {
+			background-color: #5cb85c;
+			border: none;
+			color: white;
+			padding: 10px 32px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+			cursor: pointer;
+			border-radius: 2px;
+		}
+		.input-view-button{
+			margin-left: 8px;
+			margin-top: 3px;
+		}
+
+
+		@media screen and (max-width: 1024px){
+			.cards_wrap .card_item{
+				width: 33%;
+			}
+		}
+
+		@media screen and (max-width: 768px){
+			.cards_wrap .card_item{
+				width: 50%;
+			}
+	
+			.wrapper .header{
+				font-size: 16px;
+				height: 60px;
+			}
+		}
+
+		@media screen and (max-width: 568px){
+			.cards_wrap .card_item{
+				width: 100%;
+			}
+	
+			.wrapper .header{
+				font-size: 14px;
+			}
+		}
+
+	</style>
+<body>
+	<!-- Sidebar nav -->
+	<section id="sidebar">
+		<a href="#" class="brand">	
+			Naija <span id="funding"> FundSme </span> 
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text"> Dashboard </span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-shopping-bag-alt'></i>
+					<span class="text"> View available Sme's </span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-bank'></i>
+					<span class="text"> Transaction History </span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text"> Status </span>
+				</a>
+			</li>
+		</ul>
+		<hr>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="{{ url_for('login_investor', alert=1)}}" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+	<!-- horizontal nav -->
+	<section id="content">
+		<!-- Navbar -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<div class="dropdown">
+				<div style="margin-left: 50px;">
+					<i class='bx bxs-wallet' style=""></i>
+					<button class="nav-link dropbtn" style="">Wallet</button>
+				</div>
+				<div class="dropdown-content">
+				  <a href="{{ url_for('payment', ip=investors_id, alert=1)}}">Fund Wallet</a>
+				</div>
+			  </div>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search Sme's...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num"> 8 </span>
+			</a>
+			<a href="#" class="profile">
+			</a>
+		</nav>
+		<main>
+			<div class="head-title">
+				<div class="left">
+					{% if display_alert == 0 %}
+						<div id="alert" class="alert alert-danger alert-dismissible  show" role="alert"> <strong>INSUFFICIENT BALANCE</strong>  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div>
+					{% elif display_alert == 2 %}
+						<div id="alert" class="alert alert-success alert-dismissible  show" role="alert"> <strong>Amount Transfered Suucessfully</strong>  <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">&times;</span> </button> </div>
+					{% endif %}
+					<h1> Welcome, {{ display_investors_user_name }}<span style="margin-left: 400px; font-size: 17px; color: #AAAAAA;"><!--Company Name: {{ display_company_id }}</span>--></h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#"> Dashboard </a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-calendar-check' style="color: green" ></i>
+					<span class="text">
+						<h3>  </h3>
+						<p> Transaction History </p>
+					</span>
+				</li>
+				
+				<li>
+					<i class=""></i>
+					<span class="text">
+						<h3> ₦{{ display_balance }} </h3>
+						<p> Available Balance </p>
+					</span>
+				</li>
+			</ul>
+
+			<!--AVAILABLE SSME SECTION PART-->
+			<div class="wrapper">
+				<div class="cards_wrap">
+					<div class="card_item">
+						<div class="card_inner">
+							<img src="{{ url_for('static', filename='img/1668898.jpg')}}">
+							<div class="role_name"> loura, Kano </div>
+							<div class="real_name"> Wisdom Dakoh </div>
+							<div class="film">
+								Hi, my name is Dakoh Wisdom and i just started a tailoring business i need funsdings to pursue my goals in the fashion.
+							</div>
+							<div class="input-view-button">
+								<button type="button" class="button" data-toggle="modal" data-target="#myModal"><b>VIEW SSME</b></button>
+        					</div>
+							<div class="modal fade" id="myModal" role="dialog">
+								<div class="modal-dialog">
+								
+								  <!-- Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title">Wisdom Dakoh</h4>
+									</div>
+									<div class="modal-body">
+									  <label style="font-size: 23px;">About SSME</label>
+									  <p>Hi, my name is Dakoh Wisdom and i just started a tailoring business i need funsdings to pursue my goals in the fashion.</p>
+									  <label style="font-size: 23px;">Contact Info</label>
+									  <p>Phone Number: +234 705 231 6803</p>
+									  <p>Email: wiizzydreadmill@gmail.com</p>
+									</div>
+									<!--IF STATMENT GOES HERE-->
+									{% if display_balance == 0 %}
+										<div class="col-xs-12">
+											<div class="alert alert-danger" role="alert">Your Balance is ₦0. Proceed to <a href="{{ url_for('payment', ip=investors_id, alert=1)}}">Fund Wallet</a></div>
+										</div>
+									{% endif %}
+
+									<div class="col-xs-12">
+										<p>₦151,876 raised out of ₦350,000</p>
+										<div class="progress" style="height: 3px;">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="43" aria-valuemin="0" aria-valuemax="100" style="width:43%">
+											</div>
+										</div>
+									</div>
+									<br>
+									<form action="#" method="POST" role="form">
+									  <div class="col-xs-12">
+										<div class="form-group">
+											<div class="input-group"> 
+											  <input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+											</div>
+																	
+										</div>
+									  </div>
+							
+									  <button class="btn btn-success btn-lg btn-block" type="submit">
+										<i class="fa fa-dollar"></i> Fund SSMe
+									  </button>
+									</form>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								  </div>
+								  
+								</div>
+							  </div>
+						</div>
+					</div>
+					
+
+
+
+
+
+
+
+
+					
+
+
+
+					<div class="card_item">
+						<div class="card_inner">
+							<img src="{{ url_for('static', filename='img/1668898.jpg')}}">
+							<div class="role_name"> Mikwe, Kaduna </div>
+							<div class="real_name"> Aisha Zainab </div>
+							<div class="film">
+								My name is Aisha Zainab here to gather Nigerians to help support ukraine in the current war between ukraine and russia
+							</div>
+							<div class="input-view-button">
+								<button type="button" class="button" data-toggle="modal" data-target="#myModal3"><b>VIEW SSME</b></button>
+        					</div>
+							<div class="modal fade" id="myModal3" role="dialog">
+								<div class="modal-dialog">
+								
+								  <!-- Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title"> Aisha Zainab</h4>
+									</div>
+									<div class="modal-body">
+									  <label style="font-size: 23px;">About SSME</label>
+									  <p>My name is Aisha Zainab here to gather Nigerians to help support ukraine in the current war between ukraine and russia</p>
+									  <label style="font-size: 23px;">Contact Info</label>
+									  <p>Phone Number: +234 904 201 6712</p>
+									  <p>Email: aishacrk@yahoo.com</p>
+									</div>
+									<!--IF STATMENT GOES HERE-->
+									{% if display_balance == 0 %}
+										<div class="col-xs-12">
+											<div class="alert alert-danger" role="alert">Your Balance is ₦0. Proceed to <a href="{{ url_for('payment', ip=investors_id, alert=1)}}">Fund Wallet</a></div>
+										</div>
+									{% endif %}
+									<div class="col-xs-12">
+										<p>₦256,500 raised out of ₦500,000</p>
+										<div class="progress" style="height: 3px;">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="51.3" aria-valuemin="0" aria-valuemax="100" style="width:51.3%">
+											</div>
+										</div>
+									</div>
+									<br>
+									<form action="#" method="POST" role="form">
+									  <div class="col-xs-12">
+										<div class="form-group">
+											<div class="input-group"> 
+											  <input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+											</div>
+																	
+										</div>
+									  </div>
+							
+									  <button class="btn btn-success btn-lg btn-block" type="submit">
+										<i class="fa fa-dollar"></i> Fund SSMe
+									  </button>
+									</form>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								  </div>
+								  
+								</div>
+							  </div>
+
+
+						</div>
+					</div>
+					
+
+
+
+
+
+
+
+
+
+
+					<div class="card_item">
+						<div class="card_inner">
+							<img src="{{ url_for('static', filename='img/1668898.jpg')}}">
+							<div class="role_name">KIBIYA , KANO</div>
+							<div class="real_name">Olumide Adesinya</div>
+							<div class="film">
+								Gooday, My name is Olmude and i want to gather enough funds and capital to help support orphans in the Kano.
+							</div>
+							<div class="input-view-button">
+								<button type="button" class="button" data-toggle="modal" data-target="#myModal4"><b>VIEW SSME</b></button>
+        					</div>
+							<div class="modal fade" id="myModal4" role="dialog">
+								<div class="modal-dialog">
+								
+								  <!--Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title"> Olumide Adesinya</h4>
+									</div>
+									<div class="modal-body">
+									  <label style="font-size: 23px;">About SSME</label>
+									  <p>Gooday, My name is Olmude and i want to gather enough funds and capital to help support orphans in the Kano.</p>
+									  <label style="font-size: 23px;">Contact Info</label>
+									  <p>Phone Number: +234 808 331 6712</p>
+									  <p>Email: pastorolumide2003@gmail.com</p>
+									</div>
+									<!--IF STATMENT GOES HERE-->
+									{% if display_balance == 0 %}
+										<div class="col-xs-12">
+											<div class="alert alert-danger" role="alert">Your Balance is ₦0. Proceed to <a href="{{ url_for('payment', ip=investors_id, alert=1)}}">Fund Wallet</a></div>
+										</div>
+									{% endif %}
+									<div class="col-xs-12">
+										<p>₦523,321 raised out of ₦700,000</p>
+										<div class="progress" style="height: 3px;">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="74.7" aria-valuemin="0" aria-valuemax="100" style="width:74.7%">
+											</div>
+										</div>
+									</div>
+									<br>
+									<form action="#" method="POST" role="form">
+									  <div class="col-xs-12">
+										<div class="form-group">
+											<div class="input-group"> 
+											  <input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+											</div>
+																	
+										</div>
+									  </div>
+							
+									  <button class="btn btn-success btn-lg btn-block" type="submit">
+										<i class="fa fa-dollar"></i> Fund SSMe
+									  </button>
+									</form>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								  </div>
+								  
+								</div>
+							  </div>
+
+
+						</div>
+					</div>
+
+
+
+
+
+					<!--FOR LOOP BODY STARTS HERE-->
+					{% for i in display_ssme_data %}
+						<div class="card_item">
+							<div class="card_inner">
+								<img src="{{ url_for('static', filename='img/1668898.jpg')}}">
+								<div class="role_name">{{ i[3] }}</div>
+								<div class="real_name">{{ i[0] }}</div>
+								<div class="film">
+									{{ i[5] }}
+								</div>
+								<div class="input-view-button">
+									<button type="button" class="button" data-toggle="modal" data-target="#{{ i[7] }}"><b>VIEW SSME</b></button>
+								</div>
+								<div class="modal fade" id="{{ i[7] }}" role="dialog">
+									<div class="modal-dialog">
+									
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">{{ i[0] }}</h4>
+										</div>
+										<div class="modal-body">
+										<label style="font-size: 23px;">About SSME</label>
+										<p>{{ i[5] }}</p>
+										<label style="font-size: 23px;">Contact Info</label>
+										<p>Phone Number: +234 {{ i[1][0] }}{{ i[1][1] }}{{ i[1][2] }} {{ i[1][3] }}{{ i[1][4] }}{{ i[1][5] }} {{ i[1][6] }}{{ i[1][7] }}{{ i[1][8] }}{{ i[1][9] }}</p>
+										<p>Email: {{ i[2] }}</p>
+										</div>
+										<!--IF STATMENT GOES HERE-->
+										{% if display_balance == 0 %}
+											<div class="col-xs-12">
+												<div class="alert alert-danger" role="alert">Your Balance is ₦0. Proceed to <a href="{{ url_for('payment', ip=investors_id, alert=1)}}">Fund Wallet</a></div>
+											</div>
+										{% endif %}
+										<div class="col-xs-12">
+											<p>₦{{ i[10] }} raised out of ₦{{ i[9] }}</p>
+											<div class="progress" style="height: 3px;">
+												<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ i[8] }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ i[8] }}%">
+												</div>
+											</div>
+										</div>
+										<br>
+										<form action="#" method="POST" role="form">
+										<div class="col-xs-12">
+											<div class="form-group">
+												<div class="input-group"> 
+												<input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+												</div>
+																		
+											</div>
+										</div>
+								
+										<button class="btn btn-success btn-lg btn-block" type="submit">
+											<i class="fa fa-dollar"></i> Fund SSMe
+										</button>
+										</form>
+										<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
+									</div>
+									
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					{% endfor %}
+					
+
+
+
+
+
+
+
+					<div class="card_item">
+						<div class="card_inner">
+							<img src="{{ url_for('static', filename='img/1668898.jpg')}}">
+							<div class="role_name"> Mikwe, Kaduna </div>
+							<div class="real_name"> Djoyi Toluwani </div>
+							<div class="film">
+								I am Djoyi Toluwani We are here to gather Nigerians to help support ukraine in the current war in ukraine
+							</div>
+							<div class="input-view-button">
+								<button type="button" class="button" data-toggle="modal" data-target="#myModal5"><b>VIEW SSME</b></button>
+        					</div>
+							<div class="modal fade" id="myModal5" role="dialog">
+								<div class="modal-dialog">
+								
+								  <!-- Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title"> Djoyi Toluwani</h4>
+									</div>
+									<div class="modal-body">
+									  <label style="font-size: 23px;">About SSME</label>
+									  <p>I am Djoyi Toluwani We are here to gather Nigerians to help support ukraine in the current war in ukraine</p>
+									  <label style="font-size: 23px;">Contact Info</label>
+									  <p>Phone Number: +234 704 471 0222</p>
+									  <p>Email: tolutech2003@gmail.com</p>
+									</div>
+									<!--IF STATMENT GOES HERE-->
+									{% if display_balance == 0 %}
+										<div class="col-xs-12">
+											<div class="alert alert-danger" role="alert">Your Balance is ₦0. Proceed to <a href="{{ url_for('payment', ip=investors_id, alert=1)}}">Fund Wallet</a></div>
+										</div>
+									{% endif %}
+									<div class="col-xs-12">
+										<p>₦291,850 raised out of ₦1,000,000</p>
+										<div class="progress" style="height: 3px;">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="29.1" aria-valuemin="0" aria-valuemax="100" style="width:29.1%">
+											</div>
+										</div>
+									</div>
+									<br>
+									<form action="#" method="POST" role="form">
+									  <div class="col-xs-12">
+										<div class="form-group">
+											<div class="input-group"> 
+											  <input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+											</div>
+																	
+										</div>
+									  </div>
+							
+									  <button class="btn btn-success btn-lg btn-block" type="submit">
+										<i class="fa fa-dollar"></i> Fund SSMe
+									  </button>
+									</form>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								  </div>
+								  
+								</div>
+							  </div>
+
+						</div>
+					</div>
+					
+
+
+
+
+
+					<div class="card_item">
+						<div class="card_inner">
+							<img src="{{ url_for('static', filename='img/1668898.jpg')}}">
+							<div class="role_name"> KAURA, Kaduna </div>
+							<div class="real_name"> Queen Sarah </div>
+							<div class="film">
+								Gooday Sir/Ma my name is Queen Sarah and i would like to venture into small scaled fashion business.
+							</div>
+							<div class="input-view-button">
+								<button type="button" class="button" data-toggle="modal" data-target="#myModal6"><b>VIEW SSME</b></button>
+        					</div>
+							<div class="modal fade" id="myModal6" role="dialog">
+								<div class="modal-dialog">
+								
+								  <!--Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title"> Queen Sarah</h4>
+									</div>
+									<div class="modal-body">
+									  <label style="font-size: 23px;">About SSME</label>
+									  <p>Gooday Sir/Ma my name is Queen Sarah and i would like to venture into small scaled fashion business.</p>
+									  <label style="font-size: 23px;">Contact Info</label>
+									  <p>Phone Number: +234 902 382 1379</p>
+									  <p>Email: queensarah1987@gmail.com</p>
+									</div>
+									<!--IF STATMENT GOES HERE-->
+									{% if display_balance == 0 %}
+										<div class="col-xs-12">
+											<div class="alert alert-danger" role="alert">Your Balance is ₦0. Proceed to <a href="{{ url_for('payment', ip=investors_id, alert=1)}}">Fund Wallet</a></div>
+										</div>
+									{% endif %}
+									<div class="col-xs-12">
+										<p>₦33,957 raised out of ₦100,000</p>
+										<div class="progress" style="height: 3px;">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="33.9" aria-valuemin="0" aria-valuemax="100" style="width:33.9%">
+											</div>
+										</div>
+									</div>
+									<br>
+									<form action="#" method="POST" role="form">
+									  <div class="col-xs-12">
+										<div class="form-group">
+											<div class="input-group"> 
+											  <input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+											</div>
+																	
+										</div>
+									  </div>
+							
+									  <button class="btn btn-success btn-lg btn-block" type="submit">
+										<i class="fa fa-dollar"></i> Fund SSMe
+									  </button>
+									</form>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								  </div>
+								  
+								</div>
+							  </div>
+
+
+
+						</div>
+					</div>
+					
+
+
+
+
+
+					<!--<div class="card_item">
+						<div class="card_inner">
+							<img src="{{ url_for('static', filename='img/1668898.jpg')}}" alt="">
+							<div class="role_name"> Gwarinpa, Abuja</div>
+							<div class="real_name"> Mohammed Felix </div>
+							<div class="film">
+								My name is Felix and i own a fish farming businness here in Gwarinpa and i am hoping to expand to help my family.
+							</div>
+							<div class="input-view-button">
+								<button type="button" class="button" data-toggle="modal" data-target="#myModal7"><b>VIEW SSME</b></button>
+        					</div>
+							<div class="modal fade" id="myModal7" role="dialog">
+								<div class="modal-dialog">
+								
+								  <!-Modal content->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title"> Mohammed Felix</h4>
+									</div>
+									<div class="modal-body">
+									  <label style="font-size: 23px;">About SSME</label>
+									  <p>My name is Felix and i own a fish farming businness here in Gwarinpa and i am hoping to expand to help my family.</p>
+									  <label style="font-size: 23px;">Contact Info</label>
+									  <p>Phone Number: +234 902 382 1379</p>
+									  <p>Email: felixmoh2rex@gmail.com</p>
+									</div>
+									<div class="col-xs-12">
+										<p>₦103,478 raised out of ₦200,000</p>
+										<div class="progress" style="height: 3px;">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="51.7" aria-valuemin="0" aria-valuemax="100" style="width:51.7%">
+											</div>
+										</div>
+									</div>
+									<br>
+									<form action="#" method="POST" role="form">
+									  <div class="col-xs-12">
+										<div class="form-group">
+											<div class="input-group"> 
+											  <input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+											</div>
+																	
+										</div>
+									  </div>
+							
+									  <button class="btn btn-success btn-lg btn-block" type="submit">
+										<i class="fa fa-dollar"></i> Fund SSMe
+									  </button>
+									</form>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								  </div>
+								  
+								</div>
+							  </div>
+
+						</div>
+					</div>-->
+					
+
+
+
+
+
+
+					<!--<div class="card_item">
+						<div class="card_inner">
+							<img src="{{ url_for('static', filename='img/1668898.jpg')}}">
+							<div class="role_name"> WUMO, SOKOTO </div>
+							<div class="real_name">  Ahmed Musa</div>
+							<div class="film">
+								My name is Ahmed Musa and i own a poultry farm here in WUMO and i hope in expanding my business
+							</div>
+							<div class="input-view-button">
+								<button type="button" class="button" data-toggle="modal" data-target="#myModal8"><b>VIEW SSME</b></button>
+        					</div>
+							<div class="modal fade" id="myModal8" role="dialog">
+								<div class="modal-dialog">
+								
+								  <!-Modal content--
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title"> Ahmed Musa</h4>
+									</div>
+									<div class="modal-body">
+									  <label style="font-size: 23px;">About SSME</label>
+									  <p>My name is Ahmed Musa and i own a poultry farm here in WUMO and i hope in expanding my business</p>
+									  <label style="font-size: 23px;">Contact Info</label>
+									  <p>Phone Number: +234 703 595 1299</p>
+									  <p>Email: musaahmed1976@gmail.com</p>
+									</div>
+									<div class="col-xs-12">
+										<p>₦247,500 raised out of ₦450,000</p>
+										<div class="progress" style="height: 3px;">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100" style="width:55%">
+											</div>
+										</div>
+									</div>
+									<br>
+									<form action="#" method="POST" role="form">
+									  <div class="col-xs-12">
+										<div class="form-group">
+											<div class="input-group"> 
+											  <input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+											</div>
+																	
+										</div>
+									  </div>
+							
+									  <button class="btn btn-success btn-lg btn-block" type="submit">
+										<i class="fa fa-dollar"></i> Fund SSMe
+									  </button>
+									</form>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								  </div>
+								  
+								</div>
+							  </div>
+
+						</div>
+					</div>-->
+
+
+
+
+
+
+					<div class="card_item">
+						<div class="card_inner">
+							<img src="{{ url_for('static', filename='img/1668898.jpg')}}">
+							<div class="role_name">{{ display_ssme_town }}</div>
+							<div class="real_name">{{ display_ssme_name}}</div>
+							<div class="film">
+								{{ display_ssme_desc }}
+							</div>
+							<div class="input-view-button">
+								<button type="button" class="button" data-toggle="modal" data-target="#myModal2"><b>VIEW SSME</b></button>
+        					</div>
+							<div class="modal fade" id="myModal2" role="dialog">
+								<div class="modal-dialog">
+								
+								  <!-- Modal content-->
+								  <div class="modal-content">
+									<div class="modal-header">
+									  <button type="button" class="close" data-dismiss="modal">&times;</button>
+									  <h4 class="modal-title">{{ display_ssme_name}}</h4>
+									</div>
+									<div class="modal-body">
+									  <label style="font-size: 23px;">About SSME</label>
+									  <p>{{ display_ssme_desc }}</p>
+									  <label style="font-size: 23px;">Contact Info</label>
+									  <p>Phone Number: +234 {{ display_ssme_phone[0] }}{{ display_ssme_phone[1] }}{{ display_ssme_phone[2] }} {{ display_ssme_phone[3] }}{{ display_ssme_phone[4] }}{{ display_ssme_phone[5] }} {{ display_ssme_phone[6] }}{{ display_ssme_phone[7] }}{{ display_ssme_phone[8] }}{{ display_ssme_phone[9] }}</p>
+									  <p>Email: {{ display_ssme_email }}</p>
+									</div>
+									<!--IF STATMENT GOES HERE-->
+									{% if display_balance == 0 %}
+										<div class="col-xs-12">
+											<div class="alert alert-danger" role="alert">Your Balance is ₦0. Proceed to <a href="{{ url_for('payment', ip=investors_id, alert=1)}}">Fund Wallet</a></div>
+										</div>
+									{% endif %}
+									<div class="col-xs-12">
+										<p>₦{{ display_ssme_balance }} raised out of ₦{{ display_ssme_target }}</p>
+										<div class="progress" style="height: 3px;">
+											<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="{{ display_ssme_percentage }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ display_ssme_percentage }}%">
+											</div>
+										</div>
+									</div>
+									<br>
+									<form action="#" method="POST" role="form">
+									  <div class="col-xs-12">
+										<div class="form-group">
+											<div class="input-group"> 
+											  <input type="text" name="amount_fund" class="form-control" placeholder="Enter Amount to fund" /> <span class="input-group-addon"><span class=""></span></span> 
+											</div>
+																	
+										</div>
+									  </div>
+							
+									  <button class="btn btn-success btn-lg btn-block" type="submit">
+										<i class="fa fa-dollar"></i> Fund SSMe
+									  </button>
+									</form>
+									<div class="modal-footer">
+									  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								  </div>
+								  
+								</div>
+							  </div>
+							  </div>
+						</div>
+					</div>
+					
+					
+
+
+					
+				</div>
+
+		</main>
+	</section>
+
+	
+	<!-- Scripting -->
+	<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+	<script>
+		setTimeout(function() {
+			$('#alert').alert('close');
+		}, 2000);
+
+	</script>
+</body>
+</html>
+<!-- Coded By Code-In -->

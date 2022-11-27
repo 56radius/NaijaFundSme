@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- Boxicons -->
+	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+
+	<!-- Fontawesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+	<link rel="stylesheet"  href="{{ url_for('static', filename='css/dashboard.css')}}">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet"/>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+	<title> NaijaFundSme |Sme's Dashboard </title>
+</head>
+	<style type="text/css">
+		body{
+			background-color: #eee;
+		}
+		#sidebar .side-menu.top li a:hover {
+			color: green;
+		}
+
+		#sidebar .brand {
+			font-size: 24px;
+			font-weight: 700;
+			height: 56px;
+			display: flex;
+			align-items: center;
+			color: black;
+			position: sticky;
+			top: 0;
+			left: 0;
+			background: var(--light);
+			z-index: 500;
+			padding-bottom: 20px;
+			box-sizing: content-box;
+		}
+
+		#funding {
+			color: green;
+		}
+
+		#content nav .nav-link:hover {
+			color: green;
+		}
+
+		.active {
+			color: black;
+		}
+
+		#sidebar .side-menu.top li.active a {
+			color: black;
+		}
+
+		#sidebar .side-menu.top li.active a:hover {
+			color: green;
+		}
+
+		#content main .head-title .left .breadcrumb li a.active {
+			color: black;
+			pointer-events: unset;
+		}
+
+		#content main .head-title .left .breadcrumb li a.active:hover {
+			color: green;
+		}
+
+		#content nav form .form-input button {
+			width: 36px;
+			height: 100%;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: green;
+			color: var(--light);
+			font-size: 18px;
+			border: none;
+			outline: none;
+			border-radius: 0 36px 36px 0;
+			cursor: pointer;
+		}
+
+		#content nav .switch-mode::before {
+			content: '';
+			position: absolute;
+			top: 2px;
+			left: 2px;
+			bottom: 2px;
+			width: calc(25px - 4px);
+			background: green;
+			border-radius: 50%;
+			transition: all .3s ease;
+		}
+		.circular-progress {
+            position: relative;
+            height: 100px;
+            width: 100px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+        }
+            .circular-progress:before {
+            content: "";
+            position: absolute;
+            height: 84%;
+            width: 84%;
+            background-color: #ffffff;
+            border-radius: 50%;
+        }
+            .value-container {
+            position: relative;
+            font-family: "Poppins", sans-serif;
+            font-size: 20px;
+            color: #231c3d;
+        }
+
+	</style>
+<body>
+	<!-- Sidebar nav -->
+	<section id="sidebar">
+		<a href="#" class="brand">	
+			 Naija <span id="funding"> FundSme </span> 
+		</a>
+		<ul class="side-menu top">
+			<li class="active">
+				<a href="#">
+					<i class='bx bxs-dashboard' ></i>
+					<span class="text"> Dashboard </span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-shopping-bag-alt'></i>
+					<span class="text"> Start a NaijaFundSme </span>
+				</a>
+			</li>
+			<li>
+				<button style="margin-left: 11px;" href="#" class="som">
+					<i class='bx bxs-bank'></i>
+					<span class="text" style="margin-left: 11px;"> Withdrawal </span>
+				</button>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-wallet' ></i>
+					<span class="text"> Wallet </span>
+				</a>
+			</li>
+			<li>
+				<a href="#">
+					<i class='bx bxs-group' ></i>
+					<span class="text"> Goals </span>
+				</a>
+			</li>
+		</ul>
+		<hr>
+		<ul class="side-menu">
+			<li>
+				<a href="#">
+					<i class='bx bxs-cog' ></i>
+					<span class="text">Settings</span>
+				</a>
+			</li>
+			<li>
+				<a href="#" class="logout">
+					<i class='bx bxs-log-out-circle' ></i>
+					<span class="text">Logout</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+	<!-- horizontal nav -->
+	<section id="content">
+		<!-- Navbar -->
+		<nav>
+			<i class='bx bx-menu' ></i>
+			<i class='bx bxs-wallet' ></i>
+			<a href="#" class="nav-link"> Wallet </a>
+			<form action="#">
+				<div class="form-input">
+					<input type="search" placeholder="Search...">
+					<button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+				</div>
+			</form>
+			<input type="checkbox" id="switch-mode" hidden>
+			<label for="switch-mode" class="switch-mode"></label>
+			<a href="#" class="notification">
+				<i class='bx bxs-bell' ></i>
+				<span class="num"> 8 </span>
+			</a>
+			<a href="#" class="profile">
+				<img src="{{ url_for('static', filename='img/hello.png')}}">
+			</a>
+		</nav>
+		
+		<main>
+			<div class="head-title">
+				<div class="left">
+					<h1> Welcome, {{ display_ssme_user_name }} </h1>
+					<ul class="breadcrumb">
+						<li>
+							<a href="#"> Dashboard </a>
+						</li>
+						<li><i class='bx bx-chevron-right' ></i></li>
+						<li>
+							<a class="active" href="#">Home</a>
+						</li>
+					</ul>
+				</div>
+				
+			</div>
+
+			<ul class="box-info">
+				<li>
+					<i class='bx bxs-calendar-check' style="color: green" ></i>
+					<ul>
+						<li>
+							<span class="text">
+								<h3>  </h3>
+								<p> Overview </p>
+							</span>
+							<div style="margin: 30px;">
+								<div class="circular-progress">
+									<div class="value-container">0%</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+
+
+				</li>
+				
+				<li>
+					<i class="fa-solid fa-naira-sign"></i>
+					<span class="text">
+						<h3 class="counter" data-target="{{ display_balance }}">₦{{ display_balance }} </h3>
+						<p> Available Balance </p>
+					</span>
+				</li>
+			</ul>
+
+		</main>
+	</section>
+
+	
+	<!-- Scripting -->
+	<script src="{{ url_for('static', filename='js/script.js')}}"></script>
+	<script>
+        let progressBar = document.querySelector(".circular-progress");
+        let valueContainer = document.querySelector(".value-container");
+
+
+
+        let progressValue = 0;
+        let progressEndValue = {{ display_percentage }}
+        let speed = 20;
+
+
+		
+        if(progressEndValue == 0){
+            let progress = setInterval(() => {
+            valueContainer.textContent = `${progressValue}%`;
+            progressBar.style.background = `conic-gradient(#04aa6d ${progressValue * 0}deg,#cfe8ff ${progressValue * 0}deg)`;
+            if (progressValue == progressEndValue) {
+                clearInterval(progress);
+            }
+            }, speed)
+        }
+		else{
+        let progress = setInterval(() => {
+        progressValue++;
+        valueContainer.textContent = `${progressValue}%`;
+        progressBar.style.background = `conic-gradient(#04aa6d ${progressValue * 3.6}deg,#cfe8ff ${progressValue * 3.6}deg)`;
+        if (progressValue == progressEndValue) {
+            clearInterval(progress);
+        }
+        }, speed)};
+
+    </script>
+
+	<script>
+		/*let moneyContainer = document.querySelector(".counter");
+
+		let normal_money = 0;
+		let current_money = {{ display_balance }};
+		let another_speed = 1
+
+		let the_progress = setInterval(() => {
+		normal_money++;
+        moneyContainer.textContent = `₦${normal_money}`;
+        if (normal_money == current_money) {
+            clearInterval(the_progress);
+        }
+        }, another_speed);*/
+		
+	</script>
+</body>
+</html>
+<!-- Coded By Code-In -->

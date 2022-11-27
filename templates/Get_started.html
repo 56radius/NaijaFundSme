@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NaijaFundSme |Get started </title>
+
+    <!-- styling -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <style>
+        .images {
+		    display: inline-block;
+		    max-width: 98%;
+		    height: auto;
+		    width: 60%;
+		    margin: 1%;
+		    left: 20px;
+		    text-align: center
+		}
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+            text-align: center
+        }
+        .top{
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+	 <!-- pricing -->    
+    
+    <section class="pricing" id="pricing">
+        <img class="img-responsive center" src="{{ url_for('static', filename='img/hello.png')}}">
+        <h3 class="heading" style="color: black;"> Naija <span id="fund">FUNDSME </span></h3>
+            <div class="box-container">
+
+                        <div class="box">
+                            <h3 class="title">SIGN UP AS SSME</h3>
+                              <h2 style="margin-top: 30px;margin-bottom: 5px;">As an SME and start your own campaign, where you can meet with Investors from around Nigeria to finance your new business venture.</h2>
+                                    <a href="sign_up" class="btn"> Sign Up </a>
+                        </div>
+
+                        <div class="box">
+                            <h3 class="title"> SIGN UP AS INVESTOR</h3>
+                               <h2 style="margin-top: 30px;margin-bottom: 5px;"> As an Investor you eligible to donate funds to potential SMEs and help creative entrepreneurs cope with shortage of funds of capital. </h2>
+                                    <a href="sign_up_investors" class="btn"> Sign up </a>
+                        </div>
+                </div>
+    </section>
+</body>
+</html>
+<!-- Coded By Code-In -->
